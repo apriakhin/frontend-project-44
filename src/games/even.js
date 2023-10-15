@@ -1,10 +1,21 @@
-import { startGame, getRandomInt } from '../index.js';
+import { getRandomInt } from '../index.js';
 
 const maxNumber = 100;
+let x;
 
-export default () => startGame(
-  'Answer "yes" if the number is even, otherwise answer "no".',
-  () => {},
-  () => getRandomInt(maxNumber),
-  (question) => (question % 2 === 0 ? 'yes' : 'no'),
-);
+const showInfo = () => console.log('Answer "yes" if the number is even, otherwise answer "no".');
+
+const onStartRound = () => {
+  x = getRandomInt(maxNumber);
+};
+
+const getQuestion = () => x;
+
+const getCorrectAnswer = () => (x % 2 === 0 ? 'yes' : 'no');
+
+export {
+  showInfo,
+  onStartRound,
+  getQuestion,
+  getCorrectAnswer,
+};

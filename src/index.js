@@ -2,7 +2,6 @@ import {
   welcome,
   getName,
   hello,
-  showInfo,
   showQuestion,
   getAnswer,
   showCorrect,
@@ -13,19 +12,23 @@ import {
 
 export const getRandomInt = (max) => Math.floor(Math.random() * max);
 
-export const startGame = (info, onStartRound, getQuestion, getCorrectAnswer) => {
+export const startGame = (game) => {
   welcome();
+
   const name = getName();
   hello(name);
-  showInfo(info);
+
+  game.showInfo();
 
   let count = 3;
   while (count) {
-    onStartRound();
+    game.onStartRound();
 
-    const question = getQuestion();
-    const correctAnswer = getCorrectAnswer(question);
+    const question = game.getQuestion();
+    const correctAnswer = game.getCorrectAnswer();
+
     showQuestion(question);
+
     const answer = getAnswer();
 
     if (answer === correctAnswer) {

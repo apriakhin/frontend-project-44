@@ -1,10 +1,6 @@
 #!/usr/bin/env node
 
-import {
-  welcome,
-  getName,
-  hello,
-} from '../src/cli.js';
+import { welcome, getName, hello } from '../src/cli.js';
 
 welcome();
 const name = getName();

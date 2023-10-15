@@ -1,8 +1,10 @@
-import { startGame, getRandomInt } from '../index.js';
+import { getRandomInt } from '../index.js';
 
 const maxStartElement = 20;
 const maxRandomStep = 4;
 const maxRandomCount = 5;
+let elements;
+let answerElement;
 
 const generateArithmeticSequence = (a, r, n) => {
   const arr = [];
@@ -12,22 +14,27 @@ const generateArithmeticSequence = (a, r, n) => {
   return arr;
 };
 
-let elements;
-let answerElement;
+const showInfo = () => console.log('What number is missing in the progression?');
 
-export default () => startGame(
-  'What number is missing in the progression?',
-  () => {
-    const startElement = getRandomInt(maxStartElement);
-    const step = 1 + getRandomInt(maxRandomStep);
-    const count = 5 + getRandomInt(maxRandomCount);
+const onStartRound = () => {
+  const startElement = getRandomInt(maxStartElement);
+  const step = 1 + getRandomInt(maxRandomStep);
+  const count = 5 + getRandomInt(maxRandomCount);
 
-    elements = generateArithmeticSequence(startElement, step, count);
-    const answerIndex = getRandomInt(count - 1);
+  elements = generateArithmeticSequence(startElement, step, count);
+  const answerIndex = getRandomInt(count - 1);
 
-    answerElement = elements[answerIndex];
-    elements[answerIndex] = '..';
-  },
-  () => elements.join(' '),
-  () => String(answerElement),
-);
+  answerElement = elements[answerIndex];
+  elements[answerIndex] = '..';
+};
+
+const getQuestion = () => elements.join(' ');
+
+const getCorrectAnswer = () => String(answerElement);
+
+export {
+  showInfo,
+  onStartRound,
+  getQuestion,
+  getCorrectAnswer,
+};
